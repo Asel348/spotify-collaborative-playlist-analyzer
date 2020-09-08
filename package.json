@@ -1,10 +1,11 @@
 {
   "name": "spotify-collaborative-playlist-analyzer",
   "version": "1.0.0",
-  "description": "\\- hey bro, i added the last song to our playlist. add some for fucks sake.",
-  "main": "index.js",
+  "description": "see how many tracks your friends added to your spotify collaborative playlist!",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,10 @@
   },
   "homepage": "https://github.com/Asel348/spotify-collaborative-playlist-analyzer#readme",
   "dependencies": {
-    "axios": "^0.20.0"
-  }
+    "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {}
 }
