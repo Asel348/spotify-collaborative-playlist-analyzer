@@ -1,14 +1,21 @@
 const axios = require('axios');
 
 let tracks = [];
+const ClientID = process.env.CLIENTID
+const ClientSecret= process.env.CLIENTSECRET
 
 //5efa8kbzoxkyxk1k8qevlkjj3
 //8vsp8exfi60rbon6ao008im1t
 //j5ciei4rcbpnzs70r0k9t2gfu
 //asilefeakyol
 
+axios.get('https://accounts.spotify.com/authorize?client_id=1dbaed12a128409b9e6398d58b7fbc93&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&scope=playlist-read-collaborative&state=34fFs29kd09')
+  .then(res => {
+    console.log(res);
+  })
+
 function get(nextUrl) {
-  axios({ method: 'GET', url: nextUrl, headers: {'Authorization': 'Bearer BQCpODHY2ww3dl9Vn_vlR_7zxAEEpoI_IUpMGzbBff_W3gdMf6Sc4C6I9MoWe3lDRWaUcN5LMA-GJ9HqziGXaRTUY8M15WNA_LmkPkQmQaBXXQyTQHDrW9Tp9bMzrvY9qMlbNGsqjHcbQexCOMBglyV6EycXp4zIAA', "Accept": "application/json", "Content-Type": "application/json"}})
+  axios({ method: 'GET', url: nextUrl, headers: {'Authorization': 'Bearer BQCVKDt1yRnj0YFrahP37vVotRKPlxqRV3cHQlftkPXQslZhOtlVtwul9pnzqZ6zOvtQctARifTanKKERBEHV-zU2LxxksGaaHBr3nniebOAO2aQk32wQ47gjMnRtV1xj-DKcfCaEY1hP3WVmbOt5CTmx7LffBqXvA', "Accept": "application/json", "Content-Type": "application/json"}})
     .then(res => {
       tracks.push(...res.data.items);
       console.log('Fetching...');
