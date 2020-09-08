@@ -4,4 +4,4 @@
 
 \- well, i'm sure as hell i have the most songs.
 
-\+ oh really? then lets check **spotify-collaborative-playlist-analyzer.github.io**!
+\+ oh really? then lets check **asel348.github.io/spotify-collaborative-playlist-analyzer/**!
