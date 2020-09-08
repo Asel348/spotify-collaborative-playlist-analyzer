@@ -1,0 +1,22 @@
+{
+  "name": "spotify-collaborative-playlist-analyzer",
+  "version": "1.0.0",
+  "description": "\\- hey bro, i added the last song to our playlist. add some for fucks sake.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Asel348/spotify-collaborative-playlist-analyzer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Asel348/spotify-collaborative-playlist-analyzer/issues"
+  },
+  "homepage": "https://github.com/Asel348/spotify-collaborative-playlist-analyzer#readme",
+  "dependencies": {
+    "axios": "^0.20.0"
+  }
+}
