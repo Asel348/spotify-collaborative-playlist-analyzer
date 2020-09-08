@@ -6,6 +6,7 @@ const app = express();
 let TOKEN;
 let tracks = [];
 let users = [];
+let results = [];
 
 app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
@@ -24,6 +25,12 @@ app.get('/callback', (req, res) => {
 });
 
 app.get('/result', (req, res) => {
+
+  function displayResults(r) {
+    res.render('result.ejs', {
+      result: r
+    })
+  }
 
   function get(nextUrl) {
     axios({ method: 'GET', url: nextUrl, headers: {'Authorization': `Bearer ${TOKEN}`, "Accept": "application/json", "Content-Type": "application/json"}})
@@ -45,7 +52,8 @@ app.get('/result', (req, res) => {
           for (var i = 0; i < users.length; i++) {
               if (users[i] != current) {
                   if (cnt > 0) {
-                      console.log(current + ' comes --> ' + cnt + ' times');
+                      results.push(current + ' added ' + cnt + ' tracks.')
+                      console.log(current + ' added ' + cnt + ' tracks.');
                   }
                   current = users[i];
                   cnt = 1;
@@ -54,8 +62,11 @@ app.get('/result', (req, res) => {
               }
           }
           if (cnt > 0) {
-              console.log(current + ' comes --> ' + cnt + ' times');
+
+              results.push(current + ' added ' + cnt + ' tracks.')
+              console.log(current + ' added ' + cnt + ' tracks.');
           }
+          displayResults(results);
         }
 
         count();
@@ -65,9 +76,11 @@ app.get('/result', (req, res) => {
   
   get(`https://api.spotify.com/v1/playlists/${req.query.uri_input}/tracks?offset=0&limit=100`);
 
-  res.render('result.ejs', {
-    result: TOKEN
-  })
+  // res.render('result.ejs', {
+  //   result: TOKEN
+  // })
 })
 
-app.listen(3000);
+app.listen(3000, function() {
+  console.log('App listening on port 3000!')
+});
