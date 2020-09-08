@@ -1,7 +1,3 @@
-\- hey bro, i added the last song to our playlist. add some for fucks sake.
+## spotify-collaborative-playlist-analyzer
 
-\+ fuck you, i added the most songs.
-
-\- well, i'm sure as hell i have the most songs.
-
-\+ oh really? then lets check **asel348.github.io/spotify-collaborative-playlist-analyzer/**!
+see how many tracks your friends added to your spotify collaborative playlist!
