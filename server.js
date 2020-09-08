@@ -30,6 +30,9 @@ app.get('/result', (req, res) => {
     res.render('result.ejs', {
       result: r
     })
+    results = [];
+    tracks = [];
+    users = [];
   }
 
   function get(nextUrl) {
