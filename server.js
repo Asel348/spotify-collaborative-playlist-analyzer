@@ -5,6 +5,7 @@ const app = express();
 
 let TOKEN;
 let tracks = [];
+let users = [];
 
 app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
@@ -26,23 +27,41 @@ app.get('/result', (req, res) => {
 
   function get(nextUrl) {
     axios({ method: 'GET', url: nextUrl, headers: {'Authorization': `Bearer ${TOKEN}`, "Accept": "application/json", "Content-Type": "application/json"}})
-      .then(res => {
-        tracks.push(...res.data.items);
-        console.log('Fetching...');
-        if (res.data.next) {
-          get(res.data.next);
-        } else {
-          let user1 = tracks.filter(user => user.added_by.id === "5efa8kbzoxkyxk1k8qevlkjj3");
-          console.log('5efa8kbzoxkyxk1k8qevlkjj3 has ' + user1.length + ' songs in this playlist.');
-          let user2 = tracks.filter(user => user.added_by.id === "8vsp8exfi60rbon6ao008im1t");
-          console.log('8vsp8exfi60rbon6ao008im1t has ' + user2.length + ' songs in this playlist.');
-          let user3 = tracks.filter(user => user.added_by.id === "j5ciei4rcbpnzs70r0k9t2gfu");
-          console.log('j5ciei4rcbpnzs70r0k9t2gfu has ' + user3.length + ' songs in this playlist.');
-          let user4 = tracks.filter(user => user.added_by.id === "asilefeakyol");
-          console.log('asilefeakyol has ' + user4.length + ' songs in this playlist.');
+    .then(res => {
+      tracks.push(...res.data.items);
+      console.log(tracks);
+      for (i = 0; i < res.data.items.length; i++) {
+        users.push(res.data.items[i].added_by.id);
+      }
+      if (res.data.next) {
+        get(res.data.next);
+      } else {
+
+        function count() {
+          users.sort();
+
+          var current = null;
+          var cnt = 0;
+          for (var i = 0; i < users.length; i++) {
+              if (users[i] != current) {
+                  if (cnt > 0) {
+                      console.log(current + ' comes --> ' + cnt + ' times');
+                  }
+                  current = users[i];
+                  cnt = 1;
+              } else {
+                  cnt++;
+              }
+          }
+          if (cnt > 0) {
+              console.log(current + ' comes --> ' + cnt + ' times');
+          }
         }
-      });
-  }
+
+        count();
+      }
+    });
+}
   
   get(`https://api.spotify.com/v1/playlists/${req.query.uri_input}/tracks?offset=0&limit=100`);
 
