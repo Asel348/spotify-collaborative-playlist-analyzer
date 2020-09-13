@@ -13,11 +13,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
-  res.render('index.ejs')
+  res.render('index.ejs', {
+    redirectURI: process.env.REDIRECTURI
+  })
 });
 
 app.get('/callback', (req, res) => {
-  axios({ method: 'POST', url: 'https://accounts.spotify.com/api/token', data: `grant_type=authorization_code&code=${req.query.code}&redirect_uri=http://localhost:3000/callback&client_id=${process.env.CLIENTID}&client_secret=${process.env.CLIENTSECRET}` })
+  axios({ method: 'POST', url: 'https://accounts.spotify.com/api/token', data: `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${process.env.REDIRECTURI}&client_id=${process.env.CLIENTID}&client_secret=${process.env.CLIENTSECRET}` })
     .then(r => {
       console.log(r);
       TOKEN = r.data.access_token
