@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 app.get('/callback', (req, res) => {
   axios({ method: 'POST', url: 'https://accounts.spotify.com/api/token', data: `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${process.env.REDIRECTURI}&client_id=${process.env.CLIENTID}&client_secret=${process.env.CLIENTSECRET}` })
     .then(r => {
-      console.log(r);
+      // console.log(r);
       TOKEN = r.data.access_token
       res.render('callback.ejs')
     }).catch(e => {
@@ -48,7 +48,7 @@ app.get('/result', (req, res) => {
     axios({ method: 'GET', url: nextUrl, headers: {'Authorization': `Bearer ${TOKEN}`, "Accept": "application/json", "Content-Type": "application/json"}})
     .then(res => {
       tracks.push(...res.data.items);
-      console.log(tracks);
+      // console.log(tracks);
       for (i = 0; i < res.data.items.length; i++) {
         users.push(res.data.items[i].added_by.id);
       }
@@ -65,7 +65,7 @@ app.get('/result', (req, res) => {
               if (users[i] != current) {
                   if (cnt > 0) {
                       results.push(current + ' added ' + cnt + ' tracks.')
-                      console.log(current + ' added ' + cnt + ' tracks.');
+                      // console.log(current + ' added ' + cnt + ' tracks.');
                   }
                   current = users[i];
                   cnt = 1;
@@ -76,7 +76,7 @@ app.get('/result', (req, res) => {
           if (cnt > 0) {
 
               results.push(current + ' added ' + cnt + ' tracks.')
-              console.log(current + ' added ' + cnt + ' tracks.');
+              // console.log(current + ' added ' + cnt + ' tracks.');
           }
           displayResults(results);
         }
