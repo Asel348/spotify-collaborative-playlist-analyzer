@@ -17,11 +17,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/callback', (req, res) => {
-  res.render('callback.ejs')
   axios({ method: 'POST', url: 'https://accounts.spotify.com/api/token', data: `grant_type=authorization_code&code=${req.query.code}&redirect_uri=http://localhost:3000/callback&client_id=${process.env.CLIENTID}&client_secret=${process.env.CLIENTSECRET}` })
-    .then(res => {
-      console.log(res);
-      TOKEN = res.data.access_token
+    .then(r => {
+      console.log(r);
+      TOKEN = r.data.access_token
+      res.render('callback.ejs')
+    }).catch(e => {
+      res.render('error.ejs', {
+        errorCode: e.response.status,
+        errorText: e.response.statusText
+      })
+      console.error(e.stack)
     })
 });
 
@@ -75,6 +81,12 @@ app.get('/result', (req, res) => {
 
         count();
       }
+    }).catch(e => {
+      res.render('error.ejs', {
+        errorCode: e.response.status,
+        errorText: e.response.statusText
+      })
+      console.error(e.stack)
     });
 }
   

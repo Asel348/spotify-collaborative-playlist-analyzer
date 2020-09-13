@@ -6,28 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>Step 2 of 3</title>
+    <title>Error</title>
 </head>
 
 <body>
+
     <div class="container">
         <div class="jumbotron" style="margin-top: 15vh">
-            <form action="/result" method="GET">
-                <h1 class="display-4">Enter Spotify URI</h1>
-                <hr class="my-4">
-                <div class="form-group">
-                    <label for="input1">Spotify URI <strong>(without "spotify:playlist:"):</strong></label>
-                    <input id="input1" class="form-control" name="uri_input" placeholder="303PJ0NAhTgEsVIkNHnjxr">
-                    <small class="form-text text-muted">Retriving big playlists could take a while. Please be
-                        patient.</small>
-                </div>
-                <p class="text-danger"><strong>CAUTION!</strong> You will need a Spotify
-                    <strong>URI</strong>, not an
-                    <strong>URL</strong>!</p>
-                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
-                <p><small></small></p>
-                <p><small></small></p>
-            </form>
+            <h1 class="display-4"><%= errorCode %> <%= errorText %></h1>
+            <hr class="my-4">
+            <p class="lead">Please wait a bit and try again.</p>
+            <a class="btn btn-danger btn-lg" href="/" role="button">Go Back to Step 1 :(</a>
         </div>
     </div>
 
