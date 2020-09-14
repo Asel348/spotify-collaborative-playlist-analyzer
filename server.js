@@ -44,6 +44,19 @@ app.get('/result', (req, res) => {
     users = [];
   }
 
+  function getDisplayName(uri) {
+    return axios({ method: 'GET', url: `https://api.spotify.com/v1/users/${uri}`, headers: {'Authorization': `Bearer ${TOKEN}`, "Accept": "application/json", "Content-Type": "application/json"} })
+      .then(res => {
+        return res.data.display_name;
+      });
+
+    // await axios({ method: 'GET', url: `https://api.spotify.com/v1/users/${uri}`, headers: {'Authorization': `Bearer ${TOKEN}`, "Accept": "application/json", "Content-Type": "application/json"} })
+    //   .then(async res => {
+    //     console.log(res.data);
+    //     return displayName = await res.data.display_name;
+    //   });
+  }
+
   function get(nextUrl) {
     axios({ method: 'GET', url: nextUrl, headers: {'Authorization': `Bearer ${TOKEN}`, "Accept": "application/json", "Content-Type": "application/json"}})
     .then(res => {
@@ -56,7 +69,7 @@ app.get('/result', (req, res) => {
         get(res.data.next);
       } else {
 
-        function count() {
+        async function count() {
           users.sort();
 
           var current = null;
@@ -64,7 +77,7 @@ app.get('/result', (req, res) => {
           for (var i = 0; i < users.length; i++) {
               if (users[i] != current) {
                   if (cnt > 0) {
-                      results.push(current + ' added ' + cnt + ' tracks.')
+                      results.push(await getDisplayName(current) + ' added ' + cnt + ' tracks.')
                       // console.log(current + ' added ' + cnt + ' tracks.');
                   }
                   current = users[i];
@@ -75,7 +88,7 @@ app.get('/result', (req, res) => {
           }
           if (cnt > 0) {
 
-              results.push(current + ' added ' + cnt + ' tracks.')
+              results.push(await getDisplayName(current) + ' added ' + cnt + ' tracks.')
               // console.log(current + ' added ' + cnt + ' tracks.');
           }
           displayResults(results);
@@ -90,7 +103,8 @@ app.get('/result', (req, res) => {
       })
       console.error(e.stack)
     });
-}
+  }
+  
   let url = req.query.uri_input;
 
   let uri = url.split("/").pop().split("?").splice(0, 1);
