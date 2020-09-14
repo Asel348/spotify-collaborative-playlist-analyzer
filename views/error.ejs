@@ -15,7 +15,13 @@
         <div class="jumbotron" style="margin-top: 15vh">
             <h1 class="display-4"><%= errorCode %> <%= errorText %></h1>
             <hr class="my-4">
-            <p class="lead">Please wait a bit and try again.</p>
+            <% if (errorCode == 404) { %>
+                <p class="lead">The URL you entered is invalid, or the playlist does not exist.</p>
+            <% } else if (errorCode == 401) { %>
+                <p class="lead">Your Spotify log-in session has expired or is invalid. Please try again later.</p>
+            <% } else { %>
+                <p class="lead">Please try again later.</p>
+            <% } %>
             <a class="btn btn-danger btn-lg" href="/" role="button">Go Back to Step 1 :(</a>
         </div>
     </div>
