@@ -91,8 +91,11 @@ app.get('/result', (req, res) => {
       console.error(e.stack)
     });
 }
-  
-  get(`https://api.spotify.com/v1/playlists/${req.query.uri_input}/tracks?offset=0&limit=100`);
+  let url = req.query.uri_input;
+
+  let uri = url.split("/").pop().split("?").splice(0, 1);
+
+  get(`https://api.spotify.com/v1/playlists/${uri}/tracks?offset=0&limit=100`);
 
   // res.render('result.ejs', {
   //   result: TOKEN
