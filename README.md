@@ -2,4 +2,4 @@
 
 see how many tracks your friends added to your spotify collaborative playlist!
 
-[link to site](spotify-collaborative-playlist-analyzer.glitch.me)
+[link to site](https://www.spotify-collaborative-playlist-analyzer.glitch.me)
